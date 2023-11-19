@@ -40,7 +40,7 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
       <h2>New Event</h2>
-      <form id="eventForm" action="addEventToDb.php" method="post">
+      <form id="eventForm" action="addEventToDb.php" method="post" enctype="multipart/form-data">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required>
 
@@ -128,6 +128,12 @@
 
         $conn->close();
         ?>
+
+        <!-- <div> aci</div> -->
+        <!-- <img src='./assets/betoanie.jpg' /> -->
+
+        <label for="eventImage">Event Image:</label>
+        <input type="file" id="eventImage" name="eventImage" accept="image/*">
 
         <button type="submit">Save Event</button>
       </form>

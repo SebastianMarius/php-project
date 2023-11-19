@@ -9,14 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
 
+    // Retrieve form data
     $title = $_POST['title'];
-    // Repeat for other form fields
-
-    // Use prepared statements to prevent SQL injection
-    $stmt = $conn->prepare("INSERT INTO events (title, start_date, start_time, end_date, end_time, location, description, speaker_id, partner_id, sponsor_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssssss", $title, $startDate, $startTime, $endDate, $endTime, $location, $description, $speakerId, $partnerId, $sponsorId);
-
-    // Assign values to variables (use the actual form field names)
     $startDate = $_POST['startDate'];
     $startTime = $_POST['startTime'];
     $endDate = $_POST['endDate'];
@@ -27,15 +21,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $partnerId = $_POST['partners'][0]; // Assuming you allow only one partner for simplicity
     $sponsorId = $_POST['sponsors'][0]; // Assuming you allow only one sponsor for simplicity
 
-    // Execute the prepared statement
-    if ($stmt->execute()) {
-        echo "Event added successfully";
+    // File upload handling
+    $targetDir = "assets/"; // Adjust this to the desired directory
+
+    if (isset($_FILES['eventImage']) && $_FILES['eventImage']['error'] == 0) {
+        $fileName = basename($_FILES['eventImage']['name']);
+        $targetFile = $targetDir . $fileName;
+
+        if (move_uploaded_file($_FILES['eventImage']['tmp_name'], $targetFile)) {
+            // File was successfully uploaded
+            $imagePath = './assets/' . $fileName; // Store relative path
+
+            // Extract only the file name without the directory path
+            $fileNameOnly = pathinfo($fileName, PATHINFO_FILENAME);
+
+            // Use prepared statements to prevent SQL injection
+            $stmt = $conn->prepare("INSERT INTO events (title, start_date, start_time, end_date, end_time, location, description, speaker_id, partner_id, sponsor_id, image_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssssssssss", $title, $startDate, $startTime, $endDate, $endTime, $location, $description, $speakerId, $partnerId, $sponsorId, $imagePath);
+
+            // Execute the prepared statement
+            if ($stmt->execute()) {
+                echo "Event added successfully";
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+
+            // Close the statement
+            $stmt->close();
+        } else {
+            // Error uploading file
+            echo "Error uploading file.";
+        }
     } else {
-        echo "Error: " . $stmt->error;
+        // No file uploaded or an error occurred
+        echo "No file uploaded or an error occurred.";
     }
 
-    // Close the statement and connection
-    $stmt->close();
+    // Close the connection
     $conn->close();
 }
 ?>
