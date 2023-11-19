@@ -1,0 +1,78 @@
+CREATE TABLE admins (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `events` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `start_date` date NOT NULL,
+  `start_time` time NOT NULL,
+  `end_date` date NOT NULL,
+  `end_time` time NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `speaker_id` int NOT NULL,
+  `partner_id` int NOT NULL,
+  `sponsor_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `speaker_id` (`speaker_id`),
+  KEY `partner_id` (`partner_id`),
+  KEY `sponsor_id` (`sponsor_id`)
+);
+
+CREATE TABLE `speakers` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `bio` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `partners` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `sponsors` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `speakers` (`id`, `name`, `bio`)
+VALUES
+  (1, 'John Smith', 'A leading expert in mobile technology with over 20 years of experience in the industry.'),
+  (2, 'Jane Doe', 'A renowned marketing executive with a proven track record of success in launching new products and services.'),
+  (3, 'Peter Jones', 'A passionate philanthropist and advocate for social change.'),
+  (4, 'Susan Lee', 'An innovative product designer with a knack for creating user-friendly products.'),
+  (5, 'David Brown', 'A respected business leader with a deep understanding of the global marketplace.');
+
+INSERT INTO `partners` (`id`, `name`)
+VALUES
+  (1, 'Google'),
+  (2, 'Apple'),
+  (3, 'Microsoft'),
+  (4, 'Samsung'),
+  (5, 'Amazon');
+
+INSERT INTO `sponsors` (`id`, `name`)
+VALUES
+  (1, 'PepsiCo'),
+  (2, 'Coca-Cola'),
+  (3, 'McDonald\'s'),
+  (4, 'Nike'),
+  (5, 'Adidas');
+
+INSERT INTO `events` (`title`, `start_date`, `start_time`, `end_date`, `end_time`, `location`, `description`, `speaker_id`, `partner_id`, `sponsor_id`)
+VALUES
+  ('Launch of the new smartphone', '2023-10-04', '10:00:00', '2023-10-04', '12:00:00', 'Grand Ballroom, Hilton Hotel', 'Join us for the launch of our latest smartphone, featuring cutting-edge technology and a sleek design.', 1, 1, 1),
+  ('Annual company meeting', '2023-11-15', '09:00:00', '2023-11-15', '17:00:00', 'Conference Hall, Corporate Headquarters', 'All employees are invited to attend the annual company meeting, where we will discuss our recent achievements and plans for the future.', 2, 2, 2),
+  ('Charity fundraiser gala', '2023-12-09', '18:00:00', '2023-12-09', '22:00:00', 'Ritz-Carlton Hotel', 'Support a worthy cause and enjoy an evening of fine dining, dancing, and entertainment at our annual charity gala.', 3, 3, 3),
+  ('Product demonstration event', '2024-01-25', '13:00:00', '2024-01-25', '15:00:00', 'Tech Expo Center', 'Experience the latest in technology at our product demonstration event, where you can try out our innovative products and services.', 4, 4, 4),
+  ('Leadership conference', '2024-03-07', '08:00:00', '2024-03-07', '16:00:00', 'Parkview Hotel', 'Join us for our annual leadership conference, where we will bring together industry experts and leaders to share insights and strategies for success.', 5, 5, 5);
+
+
