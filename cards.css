@@ -75,6 +75,7 @@ h1 {
 }
 
 .card {
+  position: relative;
   width: 350px;
   margin: 10px;
   background-color: #fff;
@@ -84,6 +85,16 @@ h1 {
   padding: 20px;
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
+}
+
+.action-icons {
+  width: 25px;
+  height: 25px;
+  bottom: 10px; /* Adjust as needed */
+}
+
+.trash {
+  float:right;
 }
 
 .card:hover {

@@ -9,53 +9,13 @@ h1 {
 }
 
 
+.new-event-button:hover {
+  background-color: #1565C0;
+}
+
 /* Cards styles */
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0 20px;
-}
 
-.card {
-  width: 350px;
-  margin: 10px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  transition: transform 0.2s ease-in-out;
-  cursor: pointer;
-}
 
-.card:hover {
-  transform: scale(1.05);
-}
-
-.card-header {
-  margin-bottom: 10px;
-}
-
-.card-header h2 {
-  font-size: 1.8rem;
-  margin: 0;
-  color: #2196F3;
-}
-
-.card-body {
-  margin-bottom: 10px;
-}
-
-p {
-  margin: 5px 0;
-  color: #666;
-}
-
-.card a {
-  color: #2196F3;
-  text-decoration: none;
-}
 
 /* Modal styles */
 .modal {
@@ -109,32 +69,19 @@ label {
   margin-bottom: 8px;
 }
 
-.checkbox-container input[type="checkbox"] {
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  border: 2px solid #2196F3;
-  border-radius: 3px;
-  margin-right: 8px;
-  cursor: pointer;
+input[type="checkbox"] {
+  margin-right: 5px;
 }
 
-.checkbox-container label {
-  cursor: pointer;
-}
+/* Responsive styles for the new checkboxes */
+@media only screen and (max-width: 600px) {
+  .checkbox-container {
+    flex-direction: column;
+  }
 
-/* Checked state styles */
-.checkbox-container input[type="checkbox"]:checked {
-  background-color: #2196F3;
-  border: 2px solid #2196F3;
-}
-
-.checkbox-container input[type="checkbox"]:checked::before {
-  content: "\2713";
-  display: block;
-  text-align: center;
-  line-height: 18px;
-  color: white;
+  input[type="checkbox"] {
+    margin-right: 0;
+  }
 }
 
 input,
