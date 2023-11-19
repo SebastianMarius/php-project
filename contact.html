@@ -30,7 +30,7 @@
 <h1>Contact</h1>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
 
-<form method='post'>
+<form method='post' action="send=email.php">
 <label for="name">Name</label>
 <input type="text"name="name" id="name" required>
 <label for="email">E-mail</label>
@@ -38,7 +38,7 @@
 <label for="message">message</label>
 <textarea name="message" id="message" required></textarea>
 <br>
-<button>send</button>
+<button name="submit" id="submit">send</button>
 </form>
 
 
