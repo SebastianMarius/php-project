@@ -63,24 +63,45 @@ label {
   margin-top: 10px;
 }
 
+/* Checkbox container styles */
 .checkbox-container {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
-input[type="checkbox"] {
-  margin-right: 5px;
+/* Checkbox input styling */
+.checkbox-container input[type="checkbox"] {
+  margin-right: 10px;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
 }
 
-/* Responsive styles for the new checkboxes */
+.checkbox-container input[type="checkbox"]:checked {
+  background-color: #2196F3;
+  border-color: #2196F3;
+}
+
+/* Checkbox label styling */
+.checkbox-container label {
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 5px;
+}
+/* Responsive styles for checkboxes */
 @media only screen and (max-width: 600px) {
   .checkbox-container {
     flex-direction: column;
   }
 
-  input[type="checkbox"] {
+  .checkbox-container input[type="checkbox"] {
     margin-right: 0;
+    margin-bottom: 5px;
   }
 }
 
@@ -115,5 +136,27 @@ button:hover {
   input,
   textarea {
     width: calc(100% - 16px);
+  }
+}
+
+#ticketPrice {
+  width: 10%; /* Adjust the width as needed */
+  padding: 8px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+#priceLabel {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 17px;
+  margin-left: 6px; /* Adjust the margin as needed */
+}
+
+/* Additional styling for responsiveness */
+@media only screen and (max-width: 600px) {
+  #ticketPrice {
+    margin-top: 0;
   }
 }

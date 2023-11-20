@@ -8,11 +8,9 @@
   <link rel="stylesheet" href="cards.css">
   <link rel="stylesheet" href="modal.css">
   <script src="script.js"></script>
-
 </head>
 
 <body>
-
   <header>
     <nav class="navbar">
       <div class="logo">
@@ -36,6 +34,7 @@
   <div class="cards" id="eventCards">
     <!-- Event cards will be dynamically generated here -->
   </div>
+
   <div id="eventModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
@@ -62,88 +61,51 @@
         <label for="description">Description:</label>
         <textarea id="description" name="description" rows="4"></textarea>
 
+        <div style='display:flex'>
+          <label for="ticketPrice" style='margin-top:16px; margin-right:5px'>Ticket Price:</label>
+
+          <input type="text" id="ticketPrice" name="ticketPrice" required>
+          <label id="priceLabel">lei</label>
+        </div>
+
+
         <label>Speakers:</label>
-        <?php
-        // Include your PHP code here to fetch speakers from the database
-        // Replace the example PHP code with your actual database query for speakers
-        $conn = new mysqli('localhost', 'root', '', 'evenimente_db');
+        <?php printCheckboxOptions("speakers", "SELECT id, name FROM speakers"); ?>
 
-        if ($conn->connect_error) {
-          die("Connection failed: " . $conn->connect_error);
-        }
-
-        $result = $conn->query("SELECT id, name FROM speakers");
-
-        if ($result->num_rows > 0) {
-          while ($row = $result->fetch_assoc()) {
-            echo '<div class="checkbox-container"><input type="checkbox" id="speaker_' . $row['id'] . '" name="speakers[]" value="' . $row['id'] . '">';
-            echo '<label for="speaker_' . $row['id'] . '">' . $row['name'] . '</label></div>';
-          }
-        }
-
-        $conn->close();
-        ?>
-
-        <!-- New checkboxes for sponsors -->
         <label>Sponsors:</label>
-        <?php
-        // Include your PHP code here to fetch sponsors from the database
-        // Replace the example PHP code with your actual database query for sponsors
-        $conn = new mysqli('localhost', 'root', '', 'evenimente_db');
-
-        if ($conn->connect_error) {
-          die("Connection failed: " . $conn->connect_error);
-        }
-
-        $result = $conn->query("SELECT id, name FROM sponsors");
-
-        if ($result->num_rows > 0) {
-          while ($row = $result->fetch_assoc()) {
-            echo '<div class="checkbox-container"><input type="checkbox" id="sponsor_' . $row['id'] . '" name="sponsors[]" value="' . $row['id'] . '">';
-            echo '<label for="sponsor_' . $row['id'] . '">' . $row['name'] . '</label></div>';
-          }
-        }
-
-        $conn->close();
-        ?>
+        <?php printCheckboxOptions("sponsors", "SELECT id, name FROM sponsors"); ?>
 
         <label>Partners:</label>
-        <?php
-        // Include your PHP code here to fetch partners from the database
-        // Replace the example PHP code with your actual database query for partners
-        $conn = new mysqli('localhost', 'root', '', 'evenimente_db');
-
-        if ($conn->connect_error) {
-          die("Connection failed: " . $conn->connect_error);
-        }
-
-        $result = $conn->query("SELECT id, name FROM partners");
-
-        if ($result->num_rows > 0) {
-          while ($row = $result->fetch_assoc()) {
-            echo '<div class="checkbox-container"><input type="checkbox" id="partner_' . $row['id'] . '" name="partners[]" value="' . $row['id'] . '">';
-            echo '<label for="partner_' . $row['id'] . '">' . $row['name'] . '</label></div>';
-          }
-        }
-
-        $conn->close();
-        ?>
-
-        <!-- <div> aci</div> -->
-        <!-- <img src='./assets/betoanie.jpg' /> -->
+        <?php printCheckboxOptions("partners", "SELECT id, name FROM partners"); ?>
 
         <label for="eventImage">Event Image:</label>
         <input type="file" id="eventImage" name="eventImage" accept="image/*">
 
         <button type="submit">Save Event</button>
       </form>
-
-
     </div>
   </div>
 
+  <?php
+  function printCheckboxOptions($name, $query)
+  {
+    $conn = new mysqli('localhost', 'root', '', 'evenimente_db');
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
 
+    $result = $conn->query($query);
 
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        echo '<div class="checkbox-container"><input type="checkbox" id="' . $name . '_' . $row['id'] . '" name="' . $name . '[]" value="' . $row['id'] . '">';
+        echo '<label for="' . $name . '_' . $row['id'] . '">' . $row['name'] . '</label></div>';
+      }
+    }
+
+    $conn->close();
+  }
+  ?>
 </body>
 
 </html>
