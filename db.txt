@@ -18,6 +18,7 @@ CREATE TABLE `events` (
   `speaker_id` int NOT NULL,
   `partner_id` int NOT NULL,
   `sponsor_id` int NOT NULL,
+  `ticket_price` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `speaker_id` (`speaker_id`),
   KEY `partner_id` (`partner_id`),
