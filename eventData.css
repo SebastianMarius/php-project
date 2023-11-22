@@ -35,131 +35,171 @@ nav a:hover {
     background-color: #555;
     color: white;
 }
+.container {
 
+    height:85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+    flex-grow: 1;
 
-body {
-    background-color: aquamarine;
+    width: 100%;
+    background-image: url(assets/RO_BV_Forest_2.jpg);
+    background-position: center;
+    background-size: cover;
+    padding-left: 5%;
+    padding-right: 5%;
+    box-sizing: border-box;
+    position: relative;
+
 }
-  
-  .container {
-  
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 3em;
-      flex-grow: 1;
-  
-      width: 100%;
-      background-image: url(assets/RO_BV_Forest_2.jpg);
-      background-position: center;
-      background-size: cover;
-      padding-left: 5%;
-      padding-right: 5%;
-      box-sizing: border-box;
-      position: relative;
-  
+
+.content h1 {
+    font: size 60px;
+    font-weight: 100;
+    margin-top: 24px;
+    margin-bottom: 35px;
+
+}
+
+.div1 h1 {
+    font-size: 60px;
+    font-weight: 100;
+    margin-top: 24px;
+    margin-bottom: 55px;
+
+}
+
+.content p {
+    font-size: 20px;
+    color: mediumslateblue;
+
+}
+
+.div1,
+.content {
+    width: 200em;
+    height: 25em;
+    background-color: #fff;
+    box-shadow: 5px 5px 25px #000000;
+    border-radius: 10px;
+    padding: 10px 30px;
+}
+
+.div1 .details {
+    display: flex;
+    align-items: center;
+}
+
+.content {
+    margin-left: 20%;
+    margin-top: 20%;
+    background: linear-gradient(45deg, #87adfe, #ff77cd);
+
+}
+
+@media(max-width:1200px) {
+    .container {
+        height: 100%;
+        flex-direction: column;
+    }
+
+    .content,
+    .div1 {
+        max-width: 80%;
+        padding: 30px;
+
+    }
+}
+
+h2 {
+    font-size: 3rem;
+    margin: 1, 5rem;
+}
+
+h1 {
+    opacity: 0;
+    color: #6fa9ec;
+    transform: translateY(30px);
+    animation: moveup 0.5s linear forwards;
+
+}
+
+h1.anim {
+    animation-delay: 0.5s;
+
+}
+
+
+
+.details p {
+    font-size: 3em;
+    vertical-align: middle;
+
+    opacity: 0;
+    color: #6fa9ec;
+    transform: translateX(30px);
+    animation: moveleft 0.5s linear forwards;
+    animation-delay: 1s;
+}
+
+p.doi {
+    font-size:large;
+    color:#b31d13;
+    text-align: justify;
+}
+
+
+@keyframes moveup {
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes moveleft {
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+
+}
+.socialLinks {
+    margin-top: 5em;
+    text-align: center;
+}
+
+.socialLinks a {
+    text-decoration: none;
+
+}
+
+/* aici incepe style pt bilete */
+.product {
+    display: flex;
+    margin-bottom: 20px;
   }
   
-  .content h1 {
-      font: size 60px;
-      font-weight: 100;
-      margin-top: 24px;
-      margin-bottom: 35px;
-  
+  .product img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
   }
   
-  .div1 h1 {
-      font-size: 60px;
-      font-weight: 100;
-      margin-top: 24px;
-      margin-bottom: 55px;
-  
+  .product-details {
+    padding: 10px;
+    
   }
   
-  .content p {
-      font-size: 20px;
-      color: mediumslateblue;
-  
+  .quantity-control {
+    display: flex;
+    align-items: center;
   }
   
-  .div1,
-  .content {
-      width: 200em;
-      height: 25em;
-      background-color: #fff;
-      box-shadow: 5px 5px 25px #000000;
-      border-radius: 10px;
-      padding: 10px 30px;
-  }
-  
-  .div1 .details {
-      display: flex;
-      align-items: center;
-  }
-  
-  .content {
-      margin-left: 20%;
-      margin-top: 20%;
-      background: linear-gradient(45deg, #87adfe, #ff77cd);
-  
-  }
-  
-  @media(max-width:1200px) {
-      .container {
-          height: 100%;
-          flex-direction: column;
-      }
-  
-      .content,
-      .div1 {
-          max-width: 80%;
-          padding: 30px;
-  
-      }
-  }
-  
-  h2 {
-      font-size: 3rem;
-      margin: 1, 5rem;
-  }
-  
-  h1 {
-      opacity: 0;
-      color: #f5faff;
-      transform: translateY(30px);
-      animation: moveup 0.5s linear forwards;
-  
-  }
-  
-  h1.anim {
-      animation-delay: 0.5s;
-  
-  }
-  
-  .div1 p {
-      font-size: 3em;
-      vertical-align: middle;
-  
-      opacity: 0;
-      color: #6fa9ec;
-      transform: translateX(30px);
-      animation: moveleft 0.5s linear forwards;
-      animation-delay: 1s;
-  }
-  
-  @keyframes moveup {
-      100% {
-          opacity: 1;
-          transform: translateY(0px);
-      }
-  }
-  
-  @keyframes moveleft {
-      100% {
-          opacity: 1;
-          transform: translateX(0px);
-      }
-  
-  }
-  
+  input[type="submit"]  {
+    border-radius: 10px;
+    
+    box-shadow:#444;
+    background: linear-gradient(45deg, #87adfe, #c79fe2);
+}

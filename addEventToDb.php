@@ -1,4 +1,8 @@
 <?php
+require_once('vendor/autoload.php'); // Include the Stripe PHP library
+
+\Stripe\Stripe::setApiKey('sk_test_51OFNsJIkmtRoILPuygkKzZFCef76nt6TdogKJpIVkEJ1APb5aIwiRbJQpvhXTGiOtS5YIRYPz2ljtIAelvKOSO4Q00e10msfaV'); // Set your Stripe Secret Key
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
     $title = $_POST['title'];
@@ -14,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sponsorIds = $_POST['sponsors']; // Assuming you allow multiple sponsors
 
     // File upload handling (if applicable)
-    $imageFileName = "";  // Variable to store the image file name
+    $imageFileName = "";
 
     if (isset($_FILES['eventImage']) && $_FILES['eventImage']['error'] == 0) {
         // Process the uploaded file
@@ -54,8 +58,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     insertRelationships($conn, $eventId, $partnerIds, 'partner_id');
     insertRelationships($conn, $eventId, $sponsorIds, 'sponsor_id');
 
-    // Event added successfully
-    echo "Event added successfully";
+    // Create a product in Stripe for the event
+    $product = \Stripe\Product::create([
+        'name' => $title,
+        'type' => 'service',
+    ]);
+
+    // Create a price for the product (assuming the ticket price is in cents)
+    $price = \Stripe\Price::create([
+        'product' => $product->id,
+        'unit_amount' => $ticketPrice * 100, // Convert to cents
+        'currency' => 'usd',
+    ]);
+
+    // Store the Stripe product and price IDs in your database for reference
+    $stripeProductId = $product->id;
+    $stripePriceId = $price->id;
+
+    // Update the events table with the Stripe product and price IDs
+    $updateStripeIdsStmt = $conn->prepare("UPDATE events SET stripe_product_id = ?, stripe_price_id = ? WHERE id = ?");
+    if ($updateStripeIdsStmt === false) {
+        die("Error preparing update statement: " . $conn->error);
+    }
+
+    $updateStripeIdsStmt->bind_param("ssi", $stripeProductId, $stripePriceId, $eventId);
+
+    if (!$updateStripeIdsStmt->execute()) {
+        // Error executing update query
+        die("Error updating Stripe IDs: " . $updateStripeIdsStmt->error);
+    }
+
+    $updateStripeIdsStmt->close();
+
+    // Create a Checkout Session
+
+
+    // Redirect the user to the Stripe Checkout page
+    header('Location: ' . $checkout_session->url);
+    exit;
 
     $stmt->close();
     $conn->close();
@@ -66,6 +106,10 @@ function insertRelationships($conn, $eventId, $ids, $columnName)
     foreach ($ids as $id) {
         // Update the events table to establish relationships
         $stmt = $conn->prepare("UPDATE events SET $columnName = ? WHERE id = ?");
+        if ($stmt === false) {
+            die("Error preparing relationship update statement: " . $conn->error);
+        }
+
         $stmt->bind_param("ii", $id, $eventId);
 
         // Execute the relationship query
@@ -80,6 +124,7 @@ function insertRelationships($conn, $eventId, $ids, $columnName)
     }
 }
 
+
 function handleImageUpload($file)
 {
     $targetDirectory = "assets/"; // Adjust this path to your desired upload directory
@@ -87,7 +132,7 @@ function handleImageUpload($file)
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-    // Check if image file is a actual image or fake image
+    // Check if file is an actual image
     $check = getimagesize($file["tmp_name"]);
     if ($check === false) {
         echo "Error: File is not an image.";
@@ -110,9 +155,12 @@ function handleImageUpload($file)
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
         echo "Error: Your file was not uploaded.";
-        // if everything is ok, try to upload file
     } else {
-        if (move_uploaded_file($file["tmp_name"], $targetFile)) {
+        // Read the file content
+        $fileContent = file_get_contents($file["tmp_name"]);
+
+        // Save the file content to the target directory
+        if (file_put_contents($targetFile, $fileContent)) {
             echo "The file " . htmlspecialchars(basename($file["name"])) . " has been uploaded.";
             return $targetFile; // Return the file path
         } else {
@@ -122,5 +170,3 @@ function handleImageUpload($file)
 
     return "";
 }
-
-?>
