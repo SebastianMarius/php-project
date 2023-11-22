@@ -25,6 +25,8 @@ CREATE TABLE `events` (
   KEY `sponsor_id` (`sponsor_id`)
 );
 
+ALTER TABLE events MODIFY description TEXT;
+
 CREATE TABLE `speakers` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,

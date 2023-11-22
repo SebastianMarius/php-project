@@ -23,7 +23,7 @@ const cardClick = (event) => {
 
   // Now you can access the details in other parts of your application
   window.location.replace(
-    "http://localhost/laburi/pls/php-project/eventData.php"
+    "http://localhost/laburi/pls/php-project/despre.html"
   );
   console.log("Event data stored in localStorage:", event);
 };
@@ -32,6 +32,7 @@ fetch("getEvents.php")
   .then((response) => response.json())
   .then((data) => {
     // Generate cards based on the fetched data
+    console.log(data);
     const eventCardsContainer = document.getElementById("eventCards");
     data.forEach((event) => {
       const card = document.createElement("div");
@@ -41,8 +42,9 @@ fetch("getEvents.php")
       };
       // Create a container for the image with its own opacity
       const imageContainer = document.createElement("div");
+      console.log(event, " in pula mea ");
       imageContainer.className = "card-image-container";
-      imageContainer.style.backgroundImage = `url('${event.image_path}')`;
+      imageContainer.style.backgroundImage = `url('${event.image_url}')`;
       imageContainer.style.backgroundSize = "cover"; // Adjust as needed
       imageContainer.style.opacity = 0.5;
       imageContainer.style.height = "200px"; // Set a fixed height, adjust as needed
