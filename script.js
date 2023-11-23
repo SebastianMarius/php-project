@@ -64,8 +64,6 @@ fetch("getEvents.php")
             <img class="action-icons" src='./assets/edit.svg'/ onclick='openEditModal(${event.id})'>
             <img class="action-icons trash" src='./assets/delete.svg' onclick='deleteEvent(${event.id})'/>
         </div>
-
-      
       `;
 
       // Append the text container to the card
@@ -94,8 +92,11 @@ function deleteEvent(eventId) {
   })
     .then((response) => response.text())
     .then((message) => {
-      window.location.reload();
+      console.log("Event deleted successfully");
       // Optionally, you can update the UI to remove the deleted event card
+      // After the delete operation completes, navigate to the new page
+      window.location.href =
+        "http://localhost/laburi/pls/php-project/panouDeControl.php";
     })
     .catch((error) => console.error("Error deleting event:", error));
 }

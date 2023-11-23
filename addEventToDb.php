@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // Redirect the user to the Stripe Checkout page
-    header('Location: ' . $checkout_session->url);
+    header('Location:panouDeControl.php ');
     exit;
 
     $stmt->close();

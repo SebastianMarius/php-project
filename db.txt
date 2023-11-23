@@ -39,6 +39,13 @@ CREATE TABLE `speakers` (
 
 ALTER TABLE speakers ADD COLUMN photo_url VARCHAR(255) AFTER bio;
 
+INSERT INTO `speakers` (`name`, `bio`, `photo_url`) VALUES
+('Sebastian', 'Experienced js programmer (forgot about what you see in this website)', 'sebi.jpg'),
+('Kyle Simpson', 'Kyle Simpson is an evangelist of the Open Web, passionate about all things JavaScript. He s an author, trainer, speaker, and OSS contributor.', 'kyle.jpg'),
+('Andrei', 'Sah teacher, started his carier on first class', 'chio.jpg'),
+('Jon Duckett', 'Jon Duckett is the world-wide best-selling author of HTML & CSS: Design and Build Websites and JavaScript & JQuery: Interactive Front-End Web Development. His books have sold more than 400,000 copies in English', 'jon.jpg'),
+('Grigore', 'Experienced in motorbike riding', 'grig.jpg')
+
 CREATE TABLE `partners` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,

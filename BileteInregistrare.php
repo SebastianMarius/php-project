@@ -11,6 +11,10 @@
     <!-- ... (your existing HTML code) -->
 
     <script>
+        const storedEventData = localStorage.getItem("eventDetails");
+
+
+
         // This function initializes Stripe and creates a Checkout Session
         function handleCheckout() {
             // Initialize Stripe with your publishable key
@@ -24,6 +28,7 @@
             var priceInfo = JSON.parse(price_id);
 
             const priceId = priceInfo.stripe_price_id;
+            console.log(priceId, ' ', quantity)
 
             // Make an AJAX request to create a Checkout Session
             fetch('create-checkout-session.php', {
@@ -71,15 +76,12 @@
 
     <nav>
         <a href="http://localhost/laburi/pls/php-project/despre.html" class="active">Despre</a>
-        <a href="http://localhost/laburi/pls/php-project/Agenda.html">Agenda</a>
-        <a href="http://localhost/laburi/pls/php-project/speakeri.html">Speakers</a>
+        <a href="http://localhost/laburi/pls/php-project/speakeri.php">Speakers</a>
         <a href="http://localhost/laburi/pls/php-project/parteneriSiSponsori.html">Parteneri & Sponsori</a>
-        <a href="http://localhost/laburi/pls/php-project/contactEvent.html">Contact</a>
         <a href="http://localhost/laburi/pls/php-project/BileteInregistrare.php">Bilete-inregistrare</a>
     </nav>
-
     <div class="container">
-        <div class="div1">
+        <div class="div1" id='div1' style="background-color: aqua;">
             <img src="assets/hour.png" alt="Product Image">
             <div class="product-details">
                 <h2>Product Name</h2>

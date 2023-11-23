@@ -18,7 +18,6 @@
       </div>
       <div class="nav-links">
         <button class="nav-button" onclick="window.location.href='panouDeControl.php'">Evensts</button>
-        <button class="nav-button" onclick="window.location.href='about.html'">About</button>
         <button class="nav-button" onclick="window.location.href='contact.html'">Contact</button>
       </div>
       <div class="cart-icon">
