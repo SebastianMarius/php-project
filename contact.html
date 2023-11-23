@@ -13,24 +13,21 @@
 
 <header>
     <nav class="navbar">
-      <div class="logo">
-        <h1>Events</h1>
-      </div>
+     
       <div class="nav-links">
-        <button class="nav-button">Home</button>
-        <button class="nav-button">Events</button>
+        <button class="nav-button"  onclick="window.location.href='panouDeControl.php'">Evensts</button>
         <button class="nav-button" onclick="window.location.href='about.html'">About</button>
         <button class="nav-button" onclick="window.location.href='contact.html'">Contact</button>
       </div>
       <div class="cart-icon">
-        <img src="cart-icon.png" alt="Cart Icon">
+        
       </div>
     </nav>
   </header>
-<h1>Contact</h1>
+<h1>Contactt</h1>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
 
-<form method='post' action="send=email.php">
+<form method='post' action="mailServer.php">
 <label for="name">Name</label>
 <input type="text"name="name" id="name" required>
 <label for="email">E-mail</label>

@@ -17,13 +17,12 @@
         <h1>Events</h1>
       </div>
       <div class="nav-links">
-        <button class="nav-button">Home</button>
-        <button class="nav-button">Events</button>
+        <button class="nav-button" onclick="window.location.href='panouDeControl.php'">Evensts</button>
         <button class="nav-button" onclick="window.location.href='about.html'">About</button>
         <button class="nav-button" onclick="window.location.href='contact.html'">Contact</button>
       </div>
       <div class="cart-icon">
-        <img src="cart-icon.png" alt="Cart Icon">
+
       </div>
     </nav>
   </header>

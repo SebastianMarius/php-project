@@ -37,6 +37,8 @@ CREATE TABLE `speakers` (
   PRIMARY KEY (`id`)
 );
 
+ALTER TABLE speakers ADD COLUMN photo_url VARCHAR(255) AFTER bio;
+
 CREATE TABLE `partners` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,

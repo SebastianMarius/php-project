@@ -42,7 +42,6 @@ fetch("getEvents.php")
       };
       // Create a container for the image with its own opacity
       const imageContainer = document.createElement("div");
-      console.log(event, " in pula mea ");
       imageContainer.className = "card-image-container";
       imageContainer.style.backgroundImage = `url('${event.image_url}')`;
       imageContainer.style.backgroundSize = "cover"; // Adjust as needed
